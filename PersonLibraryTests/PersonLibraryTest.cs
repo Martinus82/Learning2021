@@ -1,5 +1,7 @@
 using System;
+
 using ClassLibrary1;
+
 using Xunit;
 
 namespace PersonLibraryTests
@@ -46,6 +48,32 @@ namespace PersonLibraryTests
             Assert.IsAssignableFrom<object>(manager);
             Assert.IsType<Manager>(manager);
             Assert.IsNotType<HumanBeing>(manager);
+        }
+
+        [Fact]
+        public void TestManagerAsHuman()
+        {
+            Manager manager = new Manager("Adam", 54);
+            Person person = manager;
+            HumanBeing humanBeing = person;
+
+            Person person2 = (Person)humanBeing;
+
+            Assert.NotNull(person2);
+        }
+
+        [Fact]
+        public void TestAsOperator()
+        {
+            Person person = new Person("Adam", 25);
+            Manager manager = person as Manager;
+            Assert.Null(manager);
+        }
+
+        [Fact]
+        public void TestAsAndIsOperators()
+        {
+            // TODO: implement...
         }
 
         [Fact]
