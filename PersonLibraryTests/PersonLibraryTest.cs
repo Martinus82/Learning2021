@@ -1,7 +1,5 @@
-using System.Collections.Generic;
-
+using System;
 using ClassLibrary1;
-
 using Xunit;
 
 namespace PersonLibraryTests
@@ -33,35 +31,21 @@ namespace PersonLibraryTests
         [Fact]
         public void TestManagerCreation()
         {
-            Person manager = new Manager("Adam", 25);
-            HumanBeing humanBeing = manager;
+            object manager = new Manager("Adam", 54);
 
-            // TODO: Add asserts for human type.
+            Type type = manager.GetType();
+            Type managerType = typeof(Manager);
 
-            if (humanBeing is Manager)
-            {
-
-            }
-
-            if (humanBeing is Person)
-            {
-
-            }
-
-            if (humanBeing is HumanBeing)
-            {
-
-            }
-
-            Manager mgr = (Manager)humanBeing;
-
-            humanBeing.Sleep();
-            humanBeing.Eat();
-            //humanBeing.IncreaseSalary();
-            //manager.IncreaseSalary();
-
-            bool isCreated = humanBeing is not null;
-            Assert.True(isCreated);
+            Assert.True(type == managerType);
+            Assert.True(manager is Manager);
+            Assert.True(manager is HumanBeing);
+            Assert.True(manager is Person);
+            Assert.IsAssignableFrom<HumanBeing>(manager);
+            Assert.IsAssignableFrom<Person>(manager);
+            Assert.IsAssignableFrom<Manager>(manager);
+            Assert.IsAssignableFrom<object>(manager);
+            Assert.IsType<Manager>(manager);
+            Assert.IsNotType<HumanBeing>(manager);
         }
 
         [Fact]
