@@ -1,5 +1,5 @@
 using System;
-
+using System.Collections.Generic;
 using ClassLibrary1;
 
 using Xunit;
@@ -82,6 +82,26 @@ namespace PersonLibraryTests
             Person person = new Person("Adam", 25);
             PersonPrinter personPrinter = new PersonPrinter(person);
             personPrinter.PrintPerson();
+        }
+
+        [Fact]
+        public void TestPersonCollection()
+        {
+            Person person1 = new Person("Adam", 25);
+            Person person2 = new Person("Adam", 25);
+            Person person3 = new Person("Adam", 25);
+            Person person4 = new Person("Adam", 25);
+            Person person5 = new Person("Adam", 25);
+
+            List<Person> persons = new List<Person>
+            {
+                person1,
+                person2,
+                person3,
+                person4,
+                person5
+            };
+
         }
     }
 }
