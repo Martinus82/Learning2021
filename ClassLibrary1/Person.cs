@@ -14,5 +14,12 @@ namespace ClassLibrary1
         {
             return $"{nameof(Name)}: {Name}, {nameof(Age)}: {Age}";
         }
+
+        public static long TickElapsedFrom(int year, Func<DateTime> nowFunction)
+        {
+            DateTime now = nowFunction();
+            DateTime then = new DateTime(year, 1, 1);
+            return (now - then).Ticks;
+        }
     }
 }

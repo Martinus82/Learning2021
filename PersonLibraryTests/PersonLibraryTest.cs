@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+
 using ClassLibrary1;
 
 using Xunit;
@@ -101,7 +102,17 @@ namespace PersonLibraryTests
                 person4,
                 person5
             };
+        }
 
+        // Deterministic/honest API - Pure function example.
+        [Fact]
+        public void TestTicks()
+        {
+            DateTime Now() => new(2021, 1, 1);
+            long expectedTicks = (Now() - new DateTime(2020, 1, 1)).Ticks;
+
+            long elapsedTillNow = Person.TickElapsedFrom(2020, Now);
+            Assert.Equal(elapsedTillNow, expectedTicks);
         }
     }
 }
