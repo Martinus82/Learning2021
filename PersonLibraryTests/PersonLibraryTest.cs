@@ -94,7 +94,7 @@ namespace PersonLibraryTests
             Person person4 = new Person("Adam", 25);
             Person person5 = new Person("Adam", 25);
 
-            List<Person> persons = new List<Person>
+            IEnumerable<Person> persons = new List<Person>
             {
                 person1,
                 person2,
@@ -102,6 +102,19 @@ namespace PersonLibraryTests
                 person4,
                 person5
             };
+
+            // Test covariance
+            IEnumerable<HumanBeing> abstractPersons = persons;
+
+            Assert.NotNull(abstractPersons);
+
+            // Test Contravariance.
+            Action<object> actObject = o => { Console.Write(o); };
+
+            // An object that is instantiated with a less derived type argument
+            // is assigned to an object instantiated with a more derived type argument.
+            // Assignment compatibility is reversed.
+            Action<string> actString = actObject;
         }
 
         // Deterministic/honest API - Pure function example.
