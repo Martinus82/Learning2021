@@ -11,7 +11,7 @@ namespace CovarianceContravarianceCollection
         [Fact]
         public void TestFruits()
         {
-            IList<Fruit> fruits = new List<Fruit>
+            IEnumerable<Fruit> fruits = new List<Fruit>
             {
                 new Apple(),
                 new Banana(),
