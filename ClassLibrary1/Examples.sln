@@ -3,9 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.31702.278
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PersonLibrary", "PersonLibrary.csproj", "{CFC33F7D-B397-40AB-A33B-7B0182754B9D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PersonLibrary", "PersonLibrary.csproj", "{CFC33F7D-B397-40AB-A33B-7B0182754B9D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PersonLibraryTests", "..\PersonLibraryTests\PersonLibraryTests.csproj", "{6172E21B-D8CE-4463-A7EA-72018ECA8723}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PersonLibraryTests", "..\PersonLibraryTests\PersonLibraryTests.csproj", "{6172E21B-D8CE-4463-A7EA-72018ECA8723}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CovarianceContravarianceCollection", "..\CovarianceContravarianceCollection\CovarianceContravarianceCollection.csproj", "{ED435965-8C6E-4BD2-9A6D-7100EF8FF234}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{6172E21B-D8CE-4463-A7EA-72018ECA8723}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6172E21B-D8CE-4463-A7EA-72018ECA8723}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6172E21B-D8CE-4463-A7EA-72018ECA8723}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ED435965-8C6E-4BD2-9A6D-7100EF8FF234}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ED435965-8C6E-4BD2-9A6D-7100EF8FF234}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ED435965-8C6E-4BD2-9A6D-7100EF8FF234}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ED435965-8C6E-4BD2-9A6D-7100EF8FF234}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
