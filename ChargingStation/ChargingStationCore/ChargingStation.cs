@@ -6,7 +6,7 @@ namespace ChargingStationCore
     {
         public ChargingState State { get; private set; } // Why is important to have private set?
 
-        public void StartCharging()
+        public void StartCharging(Slot slot)
         {
             if (State == ChargingState.NonCharging)
             {
@@ -14,7 +14,7 @@ namespace ChargingStationCore
             }
         }
 
-        public void EndCharging()
+        public void StopCharging(Slot slot)
         {
             if (State == ChargingState.Charging)
             {

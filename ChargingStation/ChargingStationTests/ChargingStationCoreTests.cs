@@ -30,7 +30,7 @@ namespace ChargingStationTests
         {
             ChargingStation chargingStation = new ChargingStation();
 
-            chargingStation.StartCharging();
+            chargingStation.StartCharging(Slot.One);
 
             chargingStation.State.Should().Be(ChargingState.Charging);
         }
@@ -40,25 +40,29 @@ namespace ChargingStationTests
         {
             ChargingStation chargingStation = CreateStationInChargingState();
 
-            chargingStation.EndCharging();
+            chargingStation.StopCharging(Slot.One);
 
             chargingStation.State.Should().Be(ChargingState.NonCharging);
         }
 
-        [Fact]
-        public void Multiple_Slots_Charging()
+        [Theory]
+        [InlineData(Slot.One)]
+        [InlineData(Slot.Two)]
+        [InlineData(Slot.Three)]
+        [InlineData(Slot.Four)]
+        public void Multiple_Slots_Charging(Slot slot)
         {
             ChargingStation chargingStation = new ChargingStation();
 
-            chargingStation.StartCharging();
+            chargingStation.StartCharging(slot);
 
-            chargingStation.State.Should().Be(ChargingState.NonCharging);
+            chargingStation.State.Should().Be(ChargingState.Charging);
         }
 
         private ChargingStation CreateStationInChargingState()
         {
             ChargingStation chargingStation = new();
-            chargingStation.StartCharging();
+            chargingStation.StartCharging(Slot.One);
             return chargingStation;
         }
     }
