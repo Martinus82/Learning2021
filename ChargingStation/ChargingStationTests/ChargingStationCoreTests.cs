@@ -26,7 +26,7 @@ namespace ChargingStationTests
         }
 
         [Fact]
-        public void Charging_State_Should_Be_Charging_When_Charging_Started() //_Plug_Connected() ??? What's wrong with this name ???
+        public void Charging_State_Should_Be_Charging_When_Charging_Started_On_Slot_One() //_Plug_Connected() ??? What's wrong with this name ???
         {
             ChargingStation chargingStation = new ChargingStation();
 
@@ -36,7 +36,7 @@ namespace ChargingStationTests
         }
 
         [Fact]
-        public void Charging_State_Should_Be_NonCharging_When_Charging_Ended()
+        public void Charging_State_Should_Be_NonCharging_When_Charging_Ended_On_Slot_One()
         {
             ChargingStation chargingStation = CreateStationInChargingState();
 
@@ -50,7 +50,7 @@ namespace ChargingStationTests
         [InlineData(Slot.Two)]
         [InlineData(Slot.Three)]
         [InlineData(Slot.Four)]
-        public void Multiple_Slots_Charging(Slot slot)
+        public void Multiple_Slots_Charging(Slot slot) // What's wrong with this name? (TIP: State is charging when any slot connected)
         {
             ChargingStation chargingStation = new ChargingStation();
 
