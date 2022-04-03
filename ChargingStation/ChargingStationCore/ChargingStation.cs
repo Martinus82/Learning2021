@@ -29,7 +29,7 @@ namespace ChargingStationCore
 
         public void StartCharging(SlotId slotId, bool turboChargingRequested)
         {
-            int power = _powerDistributor.GetAvailablePower(turboChargingRequested);
+            int power = _powerDistributor.RequestPower(turboChargingRequested);
             if (power == 0)
             {
                 power = _powerDistributor.ComputePowerDecreasePerTurboSlot(turboChargingRequested);

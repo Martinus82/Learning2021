@@ -14,7 +14,7 @@ namespace ChargingStationCore
             _slotStates = slotStates ?? throw new ArgumentNullException(nameof(slotStates));
         }
 
-        public int GetAvailablePower(bool turboChargingRequested)
+        public int RequestPower(bool turboChargingRequested)
         {
             int availablePower = GetAvailablePower();
             int requestedPower = turboChargingRequested ? Slot.TurboPower : Slot.DefaultPower;
