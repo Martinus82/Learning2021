@@ -22,8 +22,8 @@
 
         internal void StartCharging(int power, bool isTurboChargingSupported)
         {
-            StartCharging(power);
             State.IsTurboChargingSupported = isTurboChargingSupported;
+            StartCharging(power is > DefaultPower and <= TurboPower && isTurboChargingSupported ? power : DefaultPower);
         }
 
         public void StopCharging()

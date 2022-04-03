@@ -1,5 +1,4 @@
-﻿using System;
-using System.Linq;
+﻿using System.Linq;
 using System.Collections.Generic;
 
 namespace ChargingStationCore
@@ -18,7 +17,7 @@ namespace ChargingStationCore
 
         public ChargingStation()
         {
-            _powerDistributor = new PowerDistributor(_slots.Values);
+            _powerDistributor = new PowerDistributor(_slots.Select(s => s.Value.State));
         }
 
         public ChargingState State
@@ -33,39 +32,28 @@ namespace ChargingStationCore
 
         public int Power => _slots.Values.Sum(s => s.State.Power);
 
-        public void StartCharging(SlotId slotId, bool requestTurboCharging)
+        public void StartCharging(SlotId slotId, bool turbo)
         {
-            var power = _powerDistributor.RequestPower(requestTurboCharging);
-            bool notEnoughPower = power == 0;
-            if (notEnoughPower)
+            int power = _powerDistributor.GetAvailablePower(turbo);
+            if (power == 0)
             {
-                power = _powerDistributor.ComputePowerDrainDecrease(requestTurboCharging);
-                RedistributePowerToActiveTurboSlot(power);
+                power = _powerDistributor.ComputePowerDecreasePerTurboSlot(turbo);
+                RedistributePowerPerEachActiveTurboSlot(power);
             }
 
-            _slots[slotId].StartCharging(power, requestTurboCharging);
+            _slots[slotId].StartCharging(power, turbo);
         }
 
         public void StartCharging(SlotId slotId)
         {
-            Slot slot = _slots[slotId];
-            var power = _powerDistributor.RequestPower(false);
-            bool notEnoughPower = power == 0;
-            if (notEnoughPower)
-            {
-                power = _powerDistributor.ComputePowerDrainDecrease(false);
-                RedistributeTotalPowerActiveTurboSlots(power);
-            }
-
-            slot.StartCharging(Slot.DefaultPower);
+            StartCharging(slotId, false);
         }
 
         public void StopCharging(SlotId slotId)
         {
-            Slot slot = _slots[slotId];
-            slot.StopCharging();
-            int totalReleasedPower = _powerDistributor.ComputePowerDrainIncrease();
-            RedistributeTotalPowerActiveTurboSlots(totalReleasedPower);
+            _slots[slotId].StopCharging();
+            int power = _powerDistributor.ComputePowerIncreasePerTurboSlot();
+            RedistributePowerPerEachActiveTurboSlot(power);
         }
 
         public SlotState GetSlotState(SlotId slotId)
@@ -74,32 +62,14 @@ namespace ChargingStationCore
             return slot.State;
         }
 
-        public void RedistributePowerToActiveTurboSlot(int powerPerSlot)
+        private void RedistributePowerPerEachActiveTurboSlot(int newTurboPower)
         {
             var activeTurboSlots = _slots
                 .Select(s => s.Value)
-                .Where(s => s.State.IsTurboChargingSupported && s.State.ChargingState == ChargingState.Charging);
+                .Where(s => s.State.IsTurboChargingSupported && s.State.ChargingState == ChargingState.Charging)
+                .ToList();
 
-            // Because default power cannot be increased, we need to push all the available power only to (between) turbo charging slots.
-            foreach (var turboSlot in activeTurboSlots)
-            {
-                turboSlot.UpdatePowerDrain(powerPerSlot);
-            }
-        }
-
-        public void RedistributeTotalPowerActiveTurboSlots(int totalPower)
-        {
-            var activeTurboSlots = _slots
-                .Select(s => s.Value)
-                .Where(s => s.State.IsTurboChargingSupported && s.State.ChargingState == ChargingState.Charging);
-
-            //int numberOfActiveTurboSlots = activeTurboSlots.Count();
-
-            // Because default power cannot be increased, we need to push all the available power only to (between) turbo charging slots.
-            foreach (var turboSlot in activeTurboSlots)
-            {
-                turboSlot.UpdatePowerDrain(totalPower);
-            }
+            activeTurboSlots.ForEach(slot => slot.UpdatePowerDrain(newTurboPower));
         }
     }
 }
