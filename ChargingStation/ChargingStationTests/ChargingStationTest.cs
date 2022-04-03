@@ -1,6 +1,9 @@
 using ChargingStationCore;
+
 using FluentAssertions;
+
 using System;
+
 using Xunit;
 
 namespace ChargingStationTests
@@ -32,7 +35,7 @@ namespace ChargingStationTests
         {
             ChargingStation chargingStation = new();      //Arrange + Act
 
-            chargingStation.State.Should().Be(ChargingState.NonCharging); //Assert
+            chargingStation.ChargingState.Should().Be(ChargingState.NonCharging); //Assert
         }
 
         [Fact]
@@ -42,7 +45,7 @@ namespace ChargingStationTests
 
             chargingStation.StartCharging(SlotId.One);                      //Act
 
-            chargingStation.State.Should().Be(ChargingState.Charging);    //Assert
+            chargingStation.ChargingState.Should().Be(ChargingState.Charging);    //Assert
         }
 
         [Fact]
@@ -52,7 +55,7 @@ namespace ChargingStationTests
 
             chargingStation.StartCharging(SlotId.Two);                      //Act
 
-            chargingStation.State.Should().Be(ChargingState.Charging);    //Assert
+            chargingStation.ChargingState.Should().Be(ChargingState.Charging);    //Assert
         }
 
         [Fact]
@@ -62,7 +65,7 @@ namespace ChargingStationTests
 
             DisconnectAllSlots(chargingStation);
 
-            chargingStation.State.Should().Be(ChargingState.NonCharging);    //Assert
+            chargingStation.ChargingState.Should().Be(ChargingState.NonCharging);    //Assert
         }
 
         private static void DisconnectAllSlots(ChargingStation chargingStation)
@@ -80,7 +83,7 @@ namespace ChargingStationTests
 
             DisconnectAllSlots(chargingStation);
 
-            chargingStation.State.Should().Be(ChargingState.NonCharging);    //Assert
+            chargingStation.ChargingState.Should().Be(ChargingState.NonCharging);    //Assert
         }
 
         private ChargingStation CreateStationInChargingStateAllSlotsConnected()
@@ -107,7 +110,7 @@ namespace ChargingStationTests
 
             chargingStation.StopCharging(SlotId.One);          //Act
 
-            chargingStation.State.Should().Be(ChargingState.NonCharging);    //Assert 
+            chargingStation.ChargingState.Should().Be(ChargingState.NonCharging);    //Assert 
         }
 
         [Fact]
@@ -115,7 +118,7 @@ namespace ChargingStationTests
         {
             ChargingStation chargingStation = new();
 
-            chargingStation.State.Should().Be(ChargingState.NonCharging);
+            chargingStation.ChargingState.Should().Be(ChargingState.NonCharging);
         }
 
         [Fact]
@@ -141,7 +144,7 @@ namespace ChargingStationTests
 
             slotState.ChargingState.Should().Be(ChargingState.NonCharging);
             //*******
-            chargingStation.State.Should().Be(ChargingState.Charging);
+            chargingStation.ChargingState.Should().Be(ChargingState.Charging);
         }
 
         [Fact]
@@ -155,7 +158,7 @@ namespace ChargingStationTests
             SlotState slotState = chargingStation.GetSlotState(SlotId.One);
             slotState.ChargingState.Should().Be(ChargingState.NonCharging);
             //*******
-            chargingStation.State.Should().Be(ChargingState.NonCharging);
+            chargingStation.ChargingState.Should().Be(ChargingState.NonCharging);
         }
 
         [Fact]
@@ -171,7 +174,7 @@ namespace ChargingStationTests
             slotOneState.ChargingState.Should().Be(ChargingState.NonCharging);
             slotTwoState.ChargingState.Should().Be(ChargingState.Charging);
             //*******
-            chargingStation.State.Should().Be(ChargingState.Charging);
+            chargingStation.ChargingState.Should().Be(ChargingState.Charging);
         }
 
         private static ChargingStation CreateStationWithTwoSlotsCharging()

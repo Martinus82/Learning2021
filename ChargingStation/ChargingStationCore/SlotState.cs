@@ -2,12 +2,8 @@
 {
     public class SlotState
     {
-        public SlotState()
-        {
-        }
-
         public ChargingState ChargingState { get; internal set; }
         public int Power { get; internal set; }
-        public bool IsTurboChargingSupported { get; internal set; } = false;
+        public bool IsTurboChargingEnabled { get; internal set; } = false;
     }
 }

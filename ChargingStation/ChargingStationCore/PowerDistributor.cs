@@ -14,10 +14,10 @@ namespace ChargingStationCore
             _slotStates = slotStates ?? throw new ArgumentNullException(nameof(slotStates));
         }
 
-        public int GetAvailablePower(bool requestTurboCharging)
+        public int GetAvailablePower(bool turboChargingRequested)
         {
             int availablePower = GetAvailablePower();
-            int requestedPower = requestTurboCharging ? Slot.TurboPower : Slot.DefaultPower;
+            int requestedPower = turboChargingRequested ? Slot.TurboPower : Slot.DefaultPower;
             if (availablePower >= requestedPower)
             {
                 return requestedPower;
@@ -28,10 +28,10 @@ namespace ChargingStationCore
 
         public int ComputePowerDecreasePerTurboSlot(bool turboRequested)
         {
-            var activeTurboChargingSlots = _slotStates.Where(s => s.IsTurboChargingSupported == true && s.ChargingState == ChargingState.Charging);
-            var activeNonTurboChargingSlots = _slotStates.Where(s => s.IsTurboChargingSupported == false && s.ChargingState == ChargingState.Charging);
+            var activeTurboChargingSlots = _slotStates.Where(s => s.IsTurboChargingEnabled == true && s.ChargingState == ChargingState.Charging);
+            var activeNonTurboChargingSlots = _slotStates.Where(s => s.IsTurboChargingEnabled == false && s.ChargingState == ChargingState.Charging);
 
-            int totalTurboPowerToBeRedistributed = 0;
+            int totalTurboPowerToBeRedistributed;
 
             if (turboRequested)
             {
@@ -52,8 +52,8 @@ namespace ChargingStationCore
 
         public int ComputePowerIncreasePerTurboSlot()
         {
-            var activeTurboChargingSlots = _slotStates.Where(s => s.IsTurboChargingSupported == true && s.ChargingState == ChargingState.Charging);
-            var activeNonTurboChargingSlots = _slotStates.Where(s => s.IsTurboChargingSupported == false && s.ChargingState == ChargingState.Charging);
+            var activeTurboChargingSlots = _slotStates.Where(s => s.IsTurboChargingEnabled == true && s.ChargingState == ChargingState.Charging);
+            var activeNonTurboChargingSlots = _slotStates.Where(s => s.IsTurboChargingEnabled == false && s.ChargingState == ChargingState.Charging);
 
             int totalTurboPowerToBeRedistributed = MaxTotalStationChargingPower - activeNonTurboChargingSlots.Sum(n => n.Power);
 

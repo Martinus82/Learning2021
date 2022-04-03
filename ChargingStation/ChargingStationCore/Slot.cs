@@ -7,36 +7,36 @@
 
         internal Slot(SlotId slotId)
         {
-            State = new();
+            SlotState = new SlotState();
             Id = slotId;
         }
 
-        public SlotState State { get; }
+        public SlotState SlotState { get; }
         public SlotId Id { get; }
 
         internal void StartCharging(int power)
         {
-            State.ChargingState = ChargingState.Charging;
-            State.Power = power;
+            SlotState.ChargingState = ChargingState.Charging;
+            SlotState.Power = power;
         }
 
-        internal void StartCharging(int power, bool isTurboChargingSupported)
+        internal void StartCharging(int power, bool turboChargingRequested)
         {
-            State.IsTurboChargingSupported = isTurboChargingSupported;
-            StartCharging(power is > DefaultPower and <= TurboPower && isTurboChargingSupported ? power : DefaultPower);
+            SlotState.IsTurboChargingEnabled = turboChargingRequested;
+            StartCharging(power is > DefaultPower and <= TurboPower && turboChargingRequested ? power : DefaultPower);
         }
 
         public void StopCharging()
         {
-            State.ChargingState = ChargingState.NonCharging;
-            State.Power = 0;
-            State.IsTurboChargingSupported = false;
+            SlotState.ChargingState = ChargingState.NonCharging;
+            SlotState.Power = 0;
+            SlotState.IsTurboChargingEnabled = false;
         }
 
         public void UpdatePowerDrain(int newPower)
         {
             newPower = newPower > TurboPower ? TurboPower : newPower;
-            State.Power = newPower;
+            SlotState.Power = newPower;
         }
     }
 }

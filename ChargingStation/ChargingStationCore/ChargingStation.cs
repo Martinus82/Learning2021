@@ -17,31 +17,31 @@ namespace ChargingStationCore
 
         public ChargingStation()
         {
-            _powerDistributor = new PowerDistributor(_slots.Select(s => s.Value.State));
+            _powerDistributor = new PowerDistributor(_slots.Select(s => s.Value.SlotState));
         }
 
-        public ChargingState State
+        public ChargingState ChargingState
         {
             get
             {
-                return _slots.Values.Any(x => x.State.ChargingState == ChargingState.Charging)
+                return _slots.Values.Any(x => x.SlotState.ChargingState == ChargingState.Charging)
                     ? ChargingState.Charging
                     : ChargingState.NonCharging;
             }
         }
 
-        public int Power => _slots.Values.Sum(s => s.State.Power);
+        public int Power => _slots.Values.Sum(s => s.SlotState.Power);
 
-        public void StartCharging(SlotId slotId, bool turbo)
+        public void StartCharging(SlotId slotId, bool turboChargingRequested)
         {
-            int power = _powerDistributor.GetAvailablePower(turbo);
+            int power = _powerDistributor.GetAvailablePower(turboChargingRequested);
             if (power == 0)
             {
-                power = _powerDistributor.ComputePowerDecreasePerTurboSlot(turbo);
+                power = _powerDistributor.ComputePowerDecreasePerTurboSlot(turboChargingRequested);
                 RedistributePowerPerEachActiveTurboSlot(power);
             }
 
-            _slots[slotId].StartCharging(power, turbo);
+            _slots[slotId].StartCharging(power, turboChargingRequested);
         }
 
         public void StartCharging(SlotId slotId)
@@ -59,14 +59,14 @@ namespace ChargingStationCore
         public SlotState GetSlotState(SlotId slotId)
         {
             Slot slot = _slots[slotId];
-            return slot.State;
+            return slot.SlotState;
         }
 
         private void RedistributePowerPerEachActiveTurboSlot(int newTurboPower)
         {
             var activeTurboSlots = _slots
                 .Select(s => s.Value)
-                .Where(s => s.State.IsTurboChargingSupported && s.State.ChargingState == ChargingState.Charging)
+                .Where(s => s.SlotState.IsTurboChargingEnabled && s.SlotState.ChargingState == ChargingState.Charging)
                 .ToList();
 
             activeTurboSlots.ForEach(slot => slot.UpdatePowerDrain(newTurboPower));

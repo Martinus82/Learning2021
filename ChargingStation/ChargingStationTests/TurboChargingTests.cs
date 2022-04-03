@@ -17,7 +17,7 @@ namespace ChargingStationTests
 
             station.StartCharging(SlotId.One, true);
 
-            station.State.Should().Be(ChargingState.Charging);
+            station.ChargingState.Should().Be(ChargingState.Charging);
             station.GetSlotState(SlotId.One).ChargingState.Should().Be(ChargingState.Charging);
             station.Power.Should().Be(200);
         }
@@ -33,7 +33,7 @@ namespace ChargingStationTests
             station.StartCharging(SlotId.Three, true);
 
             // Assert
-            station.State.Should().Be(ChargingState.Charging);
+            station.ChargingState.Should().Be(ChargingState.Charging);
             station.GetSlotState(SlotId.One).ChargingState.Should().Be(ChargingState.Charging);
             station.Power.Should().BeInRange(399, 400);
 
@@ -59,7 +59,7 @@ namespace ChargingStationTests
             station.StartCharging(SlotId.Four);
 
             // Assert
-            station.State.Should().Be(ChargingState.Charging);
+            station.ChargingState.Should().Be(ChargingState.Charging);
             station.GetSlotState(SlotId.One).ChargingState.Should().Be(ChargingState.Charging);
             station.Power.Should().BeInRange(398, 400);
 
@@ -87,7 +87,7 @@ namespace ChargingStationTests
             station.StartCharging(SlotId.Four, true);
 
             // Assert
-            station.State.Should().Be(ChargingState.Charging);
+            station.ChargingState.Should().Be(ChargingState.Charging);
             station.GetSlotState(SlotId.One).ChargingState.Should().Be(ChargingState.Charging);
             station.Power.Should().Be(400);
 
@@ -118,7 +118,7 @@ namespace ChargingStationTests
             station.StartCharging(SlotId.Four, true);
 
             // Asset
-            station.State.Should().Be(ChargingState.Charging);
+            station.ChargingState.Should().Be(ChargingState.Charging);
             station.Power.Should().Be(350);
 
             var slotStates = new List<SlotState>
@@ -147,7 +147,7 @@ namespace ChargingStationTests
             station.StartCharging(SlotId.Four, true);
 
             // Just verify :-)
-            station.State.Should().Be(ChargingState.Charging);
+            station.ChargingState.Should().Be(ChargingState.Charging);
             station.Power.Should().Be(400);
 
             // Act
