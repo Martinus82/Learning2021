@@ -8,5 +8,6 @@
 
         public ChargingState ChargingState { get; internal set; }
         public int Power { get; internal set; }
+        public bool IsTurboChargingSupported { get; internal set; } = false;
     }
 }

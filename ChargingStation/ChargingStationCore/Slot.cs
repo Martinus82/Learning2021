@@ -10,7 +10,6 @@
 
         public SlotState State { get; }
         public SlotId Id { get; }
-        public bool IsTurboChargingSupported { get; private set; } = false;
 
         internal void StartCharging(int power)
         {
@@ -21,13 +20,14 @@
         internal void StartCharging(int power, bool isTurboChargingSupported)
         {
             StartCharging(power);
-            IsTurboChargingSupported = isTurboChargingSupported;
+            State.IsTurboChargingSupported = isTurboChargingSupported;
         }
 
         public void StopCharging()
         {
             State.ChargingState = ChargingState.NonCharging;
             State.Power = 0;
+            State.IsTurboChargingSupported = false;
         }
 
         public void UpdatePowerDrain(int newPower)

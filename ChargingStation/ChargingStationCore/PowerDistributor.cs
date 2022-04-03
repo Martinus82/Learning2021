@@ -34,7 +34,7 @@ namespace ChargingStationCore
 
         public void RedistributeReleasedPowerToTurboSlots()
         {
-            var activeTurboChargingSlots = _slots.Where(slot => slot.IsTurboChargingSupported == true && slot.State.ChargingState == ChargingState.Charging);
+            var activeTurboChargingSlots = _slots.Where(slot => slot.State.IsTurboChargingSupported == true && slot.State.ChargingState == ChargingState.Charging);
             int currentPowerConsumptionOfTurboSlots = _slots.Where(s => s.State.ChargingState == ChargingState.Charging)
                 .Sum(s => s.State.Power);
 
@@ -52,8 +52,8 @@ namespace ChargingStationCore
 
         private void DecreasePowerDrainOfActiveTurboSlots(bool turboRequested)
         {
-            var activeTurboChargingSlots = _slots.Where(slot => slot.IsTurboChargingSupported == true && slot.State.ChargingState == ChargingState.Charging);
-            var activeNonTurboChargingSlots = _slots.Where(slot => slot.IsTurboChargingSupported == false && slot.State.ChargingState == ChargingState.Charging);
+            var activeTurboChargingSlots = _slots.Where(slot => slot.State.IsTurboChargingSupported == true && slot.State.ChargingState == ChargingState.Charging);
+            var activeNonTurboChargingSlots = _slots.Where(slot => slot.State.IsTurboChargingSupported == false && slot.State.ChargingState == ChargingState.Charging);
 
             if (turboRequested)
             {
