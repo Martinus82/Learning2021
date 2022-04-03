@@ -2,7 +2,8 @@ using ChargingStationCore;
 
 using FluentAssertions;
 
-using System;
+using System.Collections.Generic;
+using System.Linq;
 
 using Xunit;
 
@@ -257,12 +258,36 @@ namespace ChargingStationTests
         [Fact]
         public void StationPowerIs200WhenFourNonTurboSlotsAreCharging()
         {
-            ChargingStation chargingStation = CreateStationWithFourSlotsCharging();
+            ChargingStation chargingStation = CreateStationWithFourDefaultActiveSlots();
 
             chargingStation.Power.Should().Be(200);
         }
 
-        private static ChargingStation CreateStationWithFourSlotsCharging()
+        [Fact]
+        public void AllSlotsActiveOneDisabled()
+        {
+            ChargingStation chargingStation = CreateStationWithFourDefaultActiveSlots();
+
+            // Act
+            chargingStation.StopCharging(SlotId.Four);
+
+            // Assert
+            chargingStation.ChargingState.Should().Be(ChargingState.Charging);
+            chargingStation.GetSlotState(SlotId.Four).ChargingState.Should().Be(ChargingState.NonCharging);
+            chargingStation.GetSlotState(SlotId.Four).Power.Should().Be(0);
+
+            var remainingSlotsStates = new List<SlotState>
+            {
+                chargingStation.GetSlotState(SlotId.One),
+                chargingStation.GetSlotState(SlotId.Two),
+                chargingStation.GetSlotState(SlotId.Three)
+            };
+
+            remainingSlotsStates.Sum(s => s.Power).Should().Be(150);
+            remainingSlotsStates.ForEach(s => s.ChargingState.Should().Be(ChargingState.Charging));
+        }
+
+        private static ChargingStation CreateStationWithFourDefaultActiveSlots()
         {
             ChargingStation chargingStation = new();
             chargingStation.StartCharging(SlotId.One);
