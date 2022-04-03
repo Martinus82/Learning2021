@@ -2,6 +2,9 @@
 {
     internal class Slot
     {
+        public const int TurboPower = 200;
+        public const int DefaultPower = 50;
+
         internal Slot(SlotId slotId)
         {
             State = new();
@@ -32,6 +35,7 @@
 
         public void UpdatePowerDrain(int newPower)
         {
+            newPower = newPower > TurboPower ? TurboPower : newPower;
             State.Power = newPower;
         }
     }

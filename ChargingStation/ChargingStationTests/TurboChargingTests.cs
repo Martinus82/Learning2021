@@ -35,7 +35,7 @@ namespace ChargingStationTests
             // Assert
             station.State.Should().Be(ChargingState.Charging);
             station.GetSlotState(SlotId.One).ChargingState.Should().Be(ChargingState.Charging);
-            station.Power.Should().Be(400);
+            station.Power.Should().BeInRange(399, 400);
 
             var slotStates = new List<SlotState>
             {
@@ -61,7 +61,7 @@ namespace ChargingStationTests
             // Assert
             station.State.Should().Be(ChargingState.Charging);
             station.GetSlotState(SlotId.One).ChargingState.Should().Be(ChargingState.Charging);
-            station.Power.Should().Be(400);
+            station.Power.Should().BeInRange(398, 400);
 
             var slotStates = new List<SlotState>
             {
