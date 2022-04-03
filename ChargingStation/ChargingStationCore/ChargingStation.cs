@@ -20,15 +20,10 @@ namespace ChargingStationCore
             _powerDistributor = new PowerDistributor(_slots.Select(s => s.Value.SlotState));
         }
 
-        public ChargingState ChargingState
-        {
-            get
-            {
-                return _slots.Values.Any(x => x.SlotState.ChargingState == ChargingState.Charging)
-                    ? ChargingState.Charging
-                    : ChargingState.NonCharging;
-            }
-        }
+        public ChargingState ChargingState =>
+            _slots.Values.Any(slot => slot.SlotState.ChargingState == ChargingState.Charging)
+                ? ChargingState.Charging
+                : ChargingState.NonCharging;
 
         public int Power => _slots.Values.Sum(s => s.SlotState.Power);
 
@@ -56,11 +51,7 @@ namespace ChargingStationCore
             RedistributePowerPerEachActiveTurboSlot(power);
         }
 
-        public SlotState GetSlotState(SlotId slotId)
-        {
-            Slot slot = _slots[slotId];
-            return slot.SlotState;
-        }
+        public SlotState GetSlotState(SlotId slotId) => _slots[slotId].SlotState;
 
         private void RedistributePowerPerEachActiveTurboSlot(int newTurboPower)
         {
