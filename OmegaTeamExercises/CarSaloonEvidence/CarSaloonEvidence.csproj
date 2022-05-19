@@ -1,0 +1,50 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+    <UserSecretsId>{E9AF93B7-CA2E-4E7F-9749-0116CE9C82C1}</UserSecretsId>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="CarDbRepository\**" />
+    <Compile Remove="CarModel\**" />
+    <Compile Remove="Docker\**" />
+    <Compile Remove="MockCarRepositories\**" />
+    <Compile Remove="Repository.Abstraction\**" />
+    <Compile Remove="UnitTests\**" />
+    <Content Remove="CarDbRepository\**" />
+    <Content Remove="CarModel\**" />
+    <Content Remove="Docker\**" />
+    <Content Remove="MockCarRepositories\**" />
+    <Content Remove="Repository.Abstraction\**" />
+    <Content Remove="UnitTests\**" />
+    <EmbeddedResource Remove="CarDbRepository\**" />
+    <EmbeddedResource Remove="CarModel\**" />
+    <EmbeddedResource Remove="Docker\**" />
+    <EmbeddedResource Remove="MockCarRepositories\**" />
+    <EmbeddedResource Remove="Repository.Abstraction\**" />
+    <EmbeddedResource Remove="UnitTests\**" />
+    <None Remove="CarDbRepository\**" />
+    <None Remove="CarModel\**" />
+    <None Remove="Docker\**" />
+    <None Remove="MockCarRepositories\**" />
+    <None Remove="Repository.Abstraction\**" />
+    <None Remove="UnitTests\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="5.0.5" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="5.0.5">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="5.6.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="CarDbRepository\CarDbRepository.csproj" />
+    <ProjectReference Include="MockCarRepositories\MockCarRepositories.csproj" />
+    <ProjectReference Include="Repository.Abstraction\Repository.Abstraction.csproj" />
+  </ItemGroup>
+
+</Project>

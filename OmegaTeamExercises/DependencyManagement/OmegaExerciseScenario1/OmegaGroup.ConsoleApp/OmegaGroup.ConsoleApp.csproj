@@ -1,0 +1,16 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net5.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Reference Include="OmegaGroup.Consumers"></Reference>
+    <Reference Include="OmegaGroup.MathOperations"></Reference>
+    <Reference Include="OmegaGroup.ConsolePrinters"></Reference>
+    <Reference Include="OmegaGroup.Printers.Abstractions"></Reference>
+    <Reference Include="OmegaGroup.MathOperations.Abstractions"></Reference>
+  </ItemGroup>
+
+</Project>

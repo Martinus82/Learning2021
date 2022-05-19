@@ -1,0 +1,22 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="EmbededJsonFileCarRepository.cs" />
+    <Compile Remove="HardcodedListCarRepository.cs" />
+    <Compile Remove="JsonFileCarRepository.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="Cars.json" />
+    <None Remove="EmbededJsonFileDb.json" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Repository.Abstraction\Repository.Abstraction.csproj" />
+  </ItemGroup>
+
+</Project>

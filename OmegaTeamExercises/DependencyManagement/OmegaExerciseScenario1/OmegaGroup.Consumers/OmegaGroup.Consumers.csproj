@@ -1,0 +1,17 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Reference Include="OmegaGroup.MathOperations.Abstractions">
+    </Reference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="OmegaGroup.Printers.Abstractions">
+    </Reference>
+  </ItemGroup>
+
+</Project>

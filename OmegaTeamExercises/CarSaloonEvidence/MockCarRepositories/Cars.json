@@ -1,0 +1,112 @@
+[
+  {
+    "ModelName": "Scala",
+    "BrandName": "Skoda",
+    "Manufacturer": {
+      "Name": "Skoda",
+      "Id": 1
+    },
+    "CarType": 1,
+    "ReleasedIn": "2019-01-01T00:00:00"
+  },
+  {
+    "ModelName": "Octavia",
+    "BrandName": "Skoda",
+    "Manufacturer": {
+      "Name": "Skoda",
+      "Id": 1
+    },
+    "CarType": 2,
+    "ReleasedIn": "2010-01-01T00:00:00"
+  },
+  {
+    "ModelName": "Octavia",
+    "BrandName": "Skoda",
+    "Manufacturer": {
+      "Name": "Skoda",
+      "Id": 1
+    },
+    "CarType": 3,
+    "ReleasedIn": "2015-01-01T00:00:00"
+  },
+  {
+    "ModelName": "Octavia",
+    "BrandName": "Skoda",
+    "Manufacturer": {
+      "Name": "Skoda",
+      "Id": 1
+    },
+    "CarType": 3,
+    "ReleasedIn": "2016-01-01T00:00:00"
+  },
+  {
+    "ModelName": "i30",
+    "BrandName": "Hyundai",
+    "Manufacturer": {
+      "Name": "Hyundai",
+      "Id": 2
+    },
+    "CarType": 3,
+    "ReleasedIn": "2018-01-01T00:00:00"
+  },
+  {
+    "ModelName": "i20",
+    "BrandName": "Hyundai",
+    "Manufacturer": {
+      "Name": "Hyundai",
+      "Id": 2
+    },
+    "CarType": 1,
+    "ReleasedIn": "2017-01-01T00:00:00"
+  },
+  {
+    "ModelName": "i10",
+    "BrandName": "Hyundai",
+    "Manufacturer": {
+      "Name": "Hyundai",
+      "Id": 2
+    },
+    "CarType": 0,
+    "ReleasedIn": "2018-01-01T00:00:00"
+  },
+  {
+    "ModelName": "Ceed",
+    "BrandName": "Kia",
+    "Manufacturer": {
+      "Name": "Kia",
+      "Id": 3
+    },
+    "CarType": 2,
+    "ReleasedIn": "2013-01-01T00:00:00"
+  },
+  {
+    "ModelName": "Ceed",
+    "BrandName": "Kia",
+    "Manufacturer": {
+      "Name": "Kia",
+      "Id": 3
+    },
+    "CarType": 3,
+    "ReleasedIn": "2014-01-01T00:00:00"
+  },
+  {
+    "ModelName": "ProCeed",
+    "BrandName": "Kia",
+    "Manufacturer": {
+      "Name": "Kia",
+      "Id": 3
+    },
+    "CarType": 0,
+    "ReleasedIn": "2011-01-01T00:00:00"
+  },
+  {
+    "ModelName": "Ram",
+    "BrandName": "Dodge",
+    "Manufacturer": {
+      "Name": "Dodge",
+      "Id": 4
+    },
+    "CarType": 4,
+    "ReleasedIn": "2020-01-01T00:00:00"
+  }
+]
